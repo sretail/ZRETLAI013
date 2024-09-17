@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZRETLAI013</ARBGB>
+    <MASTERLANG>S</MASTERLANG>
+    <STEXT>Mensajes emitidos por ZRETLAI013</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Datos grabados</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Proveedor &amp; no válido.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>SPP &amp; no válido para proveedor &amp;.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>La combinación Tipo producto / Encuadernación no es válida.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Grupo de compras &amp; no válido.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Tipo producto &amp; no válido.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Jerarquía de producto &amp; no válida.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>Acuerdo devolución &amp; no válido.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Rango de validez no válido.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Especificar unidad de volumen.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Completar datos de unidad de medida adicional.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>Especificar validez para la situación.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>Es obligatorio informar una editorial</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>&amp; no es un proveedor editorial.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>No existen modificaciones LIBMOD pendientes de tratar.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>Su usuario no está asignado a ninguna tienda. No es posible continuar.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>017</MSGNR>
+     <TEXT>Informar una tienda.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZRETLAI013</ARBGB>
+     <MSGNR>018</MSGNR>
+     <TEXT>Tienda &amp; no existe o no es una tienda.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>
