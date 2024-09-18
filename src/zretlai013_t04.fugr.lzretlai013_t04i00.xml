@@ -3,7 +3,8 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>LZRETLAI013_T04T00</NAME>
+    <NAME>LZRETLAI013_T04I00</NAME>
+    <SQLX>X</SQLX>
     <DBAPL>S</DBAPL>
     <DBNA>D$</DBNA>
     <SUBC>I</SUBC>

@@ -42,8 +42,8 @@ FORM f_user_command_9000 .
       ENDIF.
 
       PERFORM f_inicializar_pantalla.
-    when 'CAMBIARTIENDA'.
-      perform f_get_tienda_usuario using 'X'
+    WHEN 'CAMBIARTIENDA'.
+      PERFORM f_get_tienda_usuario USING 'X'
                                 CHANGING zretlai013_s02-get_werks_usuario zretlai013_s02-get_werks_usuariot.
   ENDCASE.
 ENDFORM.
@@ -228,10 +228,10 @@ FORM f_9000_pai_validar_ean11 .
 
   IF  zretlai013_s01-sap = 'X'.
     zretlai013_s02-get_titulo_cegal = ld_valor.
-    TRANSLATE zretlai013_s02-get_titulo_cegal to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_titulo_cegal TO UPPER CASE.
   ELSE.
     zretlai013_s02-get_titulo = ld_valor.
-    TRANSLATE zretlai013_s02-get_titulo to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_titulo TO UPPER CASE.
   ENDIF.
 
   PERFORM f_get_valor_etiqueta USING  '<SUBTITULO><![CDATA['
@@ -241,10 +241,10 @@ FORM f_9000_pai_validar_ean11 .
 
   IF  zretlai013_s01-sap = 'X'.
     zretlai013_s02-get_subtitulo_cegal = ld_valor.
-    translate zretlai013_s02-get_subtitulo_cegal to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_subtitulo_cegal TO UPPER CASE.
   ELSE.
     zretlai013_s02-get_subtitulo = ld_valor.
-    translate zretlai013_s02-get_subtitulo to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_subtitulo TO UPPER CASE.
   ENDIF.
 
   PERFORM f_get_valor_etiqueta USING  '<PAIS_PUBLICACION>'
@@ -472,10 +472,10 @@ FORM f_9000_pai_validar_ean11 .
                             CHANGING  ld_valor.
   IF  zretlai013_s01-sap = 'X'.
     zretlai013_s02-get_coleccion_cegal          = ld_valor.
-    translate zretlai013_s02-get_coleccion_cegal to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_coleccion_cegal TO UPPER CASE.
   ELSE.
     zretlai013_s02-get_coleccion          = ld_valor.
-    translate zretlai013_s02-get_coleccion to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_coleccion TO UPPER CASE.
   ENDIF.
 
   PERFORM f_get_valor_etiqueta USING  '<NUMERO_COLECCION>'
@@ -514,10 +514,10 @@ FORM f_9000_pai_validar_ean11 .
                             CHANGING  ld_valor.
   IF  zretlai013_s01-sap = 'X'.
     zretlai013_s02-get_ilustrador_cubierta_cegal   = ld_valor.
-    translate zretlai013_s02-get_ilustrador_cubierta_cegal to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_ilustrador_cubierta_cegal TO UPPER CASE.
   ELSE.
     zretlai013_s02-get_ilustrador_cubierta   = ld_valor.
-    translate zretlai013_s02-get_ilustrador_cubierta to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_ilustrador_cubierta TO UPPER CASE.
   ENDIF.
 
   PERFORM f_get_valor_etiqueta USING  '<ILUSTRADOR_INTERIOR>'
@@ -546,10 +546,10 @@ FORM f_9000_pai_validar_ean11 .
                             CHANGING ld_valor.
   IF  zretlai013_s01-sap = 'X'.
     zretlai013_s02-get_traductor_cegal   = ld_valor.
-    translate zretlai013_s02-get_traductor_cegal to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_traductor_cegal TO UPPER CASE.
   ELSE.
     zretlai013_s02-get_traductor   = ld_valor.
-    translate zretlai013_s02-get_traductor to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_traductor TO UPPER CASE.
   ENDIF.
 
 
@@ -662,25 +662,19 @@ FORM f_9000_pai_validar_ean11 .
                             CHANGING  ld_valor.
   IF  zretlai013_s01-sap = 'X'.
     zretlai013_s02-get_nombre_autor_cegal       = ld_valor.
-    translate zretlai013_s02-get_nombre_autor_cegal to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_nombre_autor_cegal TO UPPER CASE.
   ELSE.
     zretlai013_s02-get_nombre_autor       = ld_valor.
-    translate zretlai013_s02-get_nombre_autor to UPPER CASE.
+    TRANSLATE zretlai013_s02-get_nombre_autor TO UPPER CASE.
   ENDIF.
 
   PERFORM f_get_valor_largo    TABLES git_biografia
-                                USING '<BIOGRAFIA><![CDATA['
-                                      ']]></BIOGRAFIA>'
-                                      ld_response.
+                                USING '<BIOGRAFIA><![CDATA[' ']]></BIOGRAFIA>' ld_response.
 
   PERFORM f_get_valor_largo    TABLES git_indice
-                                USING '<INDICE><![CDATA['
-                                      ']]></INDICE>'
-                                      ld_response.
+                                USING '<INDICE><![CDATA[' ']]></INDICE>' ld_response.
 
-  PERFORM f_get_valor_etiqueta USING  '<IMAGEN_PORTADA><![CDATA['
-                                      ']]></IMAGEN_PORTADA>'
-                                      ld_response
+  PERFORM f_get_valor_etiqueta USING  '<IMAGEN_PORTADA><![CDATA[' ']]></IMAGEN_PORTADA>' ld_response
                             CHANGING  ld_valor.
 
   IF ld_valor IS NOT INITIAL.
@@ -693,30 +687,26 @@ FORM f_9000_pai_validar_ean11 .
                                         ld_response
                               CHANGING  ld_valor.
 
-*  >Obtener ruta base donde almacenar las imágenes de portada
-
+*  >Ruta base donde almacenar las imágenes de portada
     SELECT SINGLE valor
       FROM zhardcodes
       INTO gd_ruta_completa
      WHERE programa = 'ZRETLAI013'
        AND param    = 'RUTA_IMG_PORTADAS'.
 
-
 *  >Crear carpeta para los los primeros 7 carácteres del EAN
-***    CONCATENATE gd_ruta_completa zretlai013_s01-ean11(7) INTO gd_ruta_completa.
-***    CONCATENATE gd_ruta_completa zretlai013_s01-ean11(7) INTO gd_ruta_completa.
-***    CONCATENATE 'cmd /c mkdir' gd_ruta_completa INTO ld_comando SEPARATED BY space.
-***    CALL 'SYSTEM' ID 'COMMAND' FIELD ld_comando.
+    CONCATENATE gd_ruta_completa zretlai013_s01-ean11(7) INTO gd_ruta_completa.
+    CONCATENATE 'cmd /c mkdir' gd_ruta_completa INTO ld_comando SEPARATED BY space.
+    CALL 'SYSTEM' ID 'COMMAND' FIELD ld_comando.
 
 *  >Borrar imágenes previas del EAN en el servidor de imágenes
-****    PERFORM f_borrar_imagenes_servidor USING gd_ruta_completa
-****                                             zretlai013_s01-ean11.
+    PERFORM f_borrar_imagenes_servidor USING gd_ruta_completa
+                                             zretlai013_s01-ean11.
 
 
 *  >Confeccionar ruta final completa para la imagen
-    translate ld_valor to UPPER CASE.
-    CONCATENATE gd_ruta_completa 'LIBROS\' zretlai013_s01-ean11 '.' ld_valor INTO gd_ruta_completa.
-
+    TRANSLATE ld_valor TO UPPER CASE.
+    CONCATENATE gd_ruta_completa '\' zretlai013_s01-ean11 '.' ld_valor INTO gd_ruta_completa.
 
 *   Abrir ruta-fichero en servidor
     OPEN DATASET gd_ruta_completa FOR OUTPUT IN BINARY MODE.
@@ -731,26 +721,28 @@ FORM f_9000_pai_validar_ean11 .
       EXCEPTIONS
         failed = 1
         OTHERS = 2.
-    IF sy-subrc <> 0.
-    ENDIF.
 
-*     Convertimos XString a binario
+    IF sy-subrc <> 0. ENDIF.
+
+*    Convertimos XString a binario
     CALL FUNCTION 'SCMS_XSTRING_TO_BINARY'
       EXPORTING
         buffer     = ld_base64_xstring
 *       APPEND_TO_TABLE       = ' '
-*         IMPORTING
+*          IMPORTING
 *       OUTPUT_LENGTH         =
       TABLES
         binary_tab = lit_imagen_binario.
 
-*     Transferimos contenido binario a ruta-fichero abierto
+*    Transferimos contenido binario a ruta-fichero abierto
     LOOP AT lit_imagen_binario INTO wa_imagen_binario.
       TRANSFER wa_imagen_binario-line TO gd_ruta_completa.
     ENDLOOP.
 
-*     Cerramos ruta-fichero
+*    Cerramos ruta-fichero
     CLOSE DATASET gd_ruta_completa.
+
+
   ENDIF.
 
 *>Determinar editorial en artículos nuevos
@@ -770,7 +762,7 @@ FORM f_9000_pai_validar_ean11 .
 
 *  <APRADAS-11.03.2022 07:53:41-Inicio
 *   Determinar si el nuevo artículo debe considerarse novedad o no
-    perform f_determinar_si_es_novedad using zretlai013_s02-get_fecha_publicacion_cegal
+    PERFORM f_determinar_si_es_novedad USING zretlai013_s02-get_fecha_publicacion_cegal
                                     CHANGING zretlai013_s02-get_zz1_novedad2_prd.
 *  <APRADAS-11.03.2022 07:53:41-Fin
 
@@ -781,7 +773,7 @@ FORM f_9000_pai_validar_ean11 .
     zretlai013_s02-get_catweb_tienda = 'X'.
 
 *   Obtener tienda del usuario
-    PERFORM f_get_tienda_usuario using ''
+    PERFORM f_get_tienda_usuario USING ''
                               CHANGING zretlai013_s02-get_werks_usuario zretlai013_s02-get_werks_usuariot.
 
 *   Determinamos los proveedores asociados a la editorial y el proveedor asociado a la tienda
@@ -918,7 +910,7 @@ FORM f_9000_pai_validar_ean11 .
 *    ENDIF.
 
 *   Determinar si el nuevo artículo debe considerarse novedad o no
-    perform f_determinar_si_es_novedad using zretlai013_s02-get_fecha_publicacion
+    PERFORM f_determinar_si_es_novedad USING zretlai013_s02-get_fecha_publicacion
                                     CHANGING zretlai013_s02-get_zz1_novedad2_prd.
 *  <APRADAS-11.03.2022 07:53:41-Fin
 
@@ -965,15 +957,17 @@ FORM f_get_editorial    USING    pe_ean11
 *   Buscamos ese ean en la tabla de determinación de editoriales
     CONCATENATE ld_ean11 '%' INTO ld_ean11_like.
 
-    SELECT SINGLE editorial_lifnr
-      FROM zretlai018t02
-      INTO ps_mfrnr
-     WHERE raiz_isbn LIKE ld_ean11_like.
-
-    IF sy-subrc = 0.
-*     Si encontramos editorial, nos salimos
-      EXIT.
-    ENDIF.
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*    SELECT SINGLE editorial_lifnr
+*      FROM zretlai018t02
+*      INTO ps_mfrnr
+*     WHERE raiz_isbn LIKE ld_ean11_like.
+*
+*    IF sy-subrc = 0.
+**     Si encontramos editorial, nos salimos
+*      EXIT.
+*    ENDIF.
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 *   Si hemos llegado al final del EAN y no hemos encontrado editorial, nos salimos.
     IF ld_ean11_strlen = 1.
@@ -1516,38 +1510,40 @@ FORM f_user_command_9000_crear_art .
                                   CHANGING zretlai013_s02-get_encuadernaciont.
 *   <APRADAS-28.10.2021 09:26:38-Fin
 
-    UPDATE mara SET zz1_autor_prd               = zretlai013_s02-get_nombre_autor
-                    zz1_idiomaoriginal2_prd      = zretlai013_s02-get_idioma_original
-                    zz1_traductor_prd           = zretlai013_s02-get_traductor
-                    zz1_ilustrador_prd          = zretlai013_s02-get_ilustrador_cubierta
-                    zz1_urlportada_prd          = zretlai013_s02-get_url
-                    zz1_coleccion_prd           = zretlai013_s02-get_coleccion
-                    zz1_cdu_prd                 = zretlai013_s02-get_cdu
-                    zz1_ibic_prd                = zretlai013_s02-get_ibic
-                    zz1_idioma2_prd              = zretlai013_s02-get_lengua_publicacion
-                    zz1_numeroedicion_prd       = zretlai013_s02-get_numero_edicion
-                    zz1_subttulo_prd            = zretlai013_s02-get_subtitulo
-                    zz1_formato_prd             = zretlai013_s02-get_encuadernaciont                "APRADAS-28.10.2021
-                    zz1_fechaedicin_prd         = zretlai013_s02-get_fecha_publicacion
-                    zz1_npginas_prd             = zretlai013_s02-get_numero_paginas
-                    zz1_etiquetas_prd           = zretlai013_s02-get_zz1_etiquetas_prd
-                    zz1_tejueloalad_prd         = zretlai013_s02-get_zz1_tejueloalad_prd
-                    zz1_novedad2_prd            = zretlai013_s02-get_zz1_novedad2_prd
-                    mfrnr                       = zretlai013_s02-get_mfrnr
-                    zz1_desceditorial_prd       = zretlai013_s02-get_mfrnrt
-                    zz1_produccinpropia_prd     =  'NO'
-                    zz1_cumplenormasegurid_prd  =  'NO'
-                    zz1_envoltorioproviene_prd  =  'NO'
-                    zz1_materialproducto_prd    =  'NO'
-                    zz1_noaptomenores3aos_prd   =  'NO'
-                    zz1_nocontenedorcomun_prd   =  'NO'
-                    zz1_productoartesanal_prd   =  'NO'
-                    zz1_productosocial_prd      =  'NO'
-                    zz1_productosostenible_prd  =  'NO'
-                    zz1_sistemagestinrecic_prd  =  'NO'
-                    zz1_productolocal_prd       =  'NO'
-
-       WHERE matnr = zretlai013_s02-matnr.
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*    UPDATE mara SET zz1_autor_prd               = zretlai013_s02-get_nombre_autor
+*                    zz1_idiomaoriginal2_prd      = zretlai013_s02-get_idioma_original
+*                    zz1_traductor_prd           = zretlai013_s02-get_traductor
+*                    zz1_ilustrador_prd          = zretlai013_s02-get_ilustrador_cubierta
+*                    zz1_urlportada_prd          = zretlai013_s02-get_url
+*                    zz1_coleccion_prd           = zretlai013_s02-get_coleccion
+*                    zz1_cdu_prd                 = zretlai013_s02-get_cdu
+*                    zz1_ibic_prd                = zretlai013_s02-get_ibic
+*                    zz1_idioma2_prd              = zretlai013_s02-get_lengua_publicacion
+*                    zz1_numeroedicion_prd       = zretlai013_s02-get_numero_edicion
+*                    zz1_subttulo_prd            = zretlai013_s02-get_subtitulo
+*                    zz1_formato_prd             = zretlai013_s02-get_encuadernaciont                "APRADAS-28.10.2021
+*                    zz1_fechaedicin_prd         = zretlai013_s02-get_fecha_publicacion
+*                    zz1_npginas_prd             = zretlai013_s02-get_numero_paginas
+*                    zz1_etiquetas_prd           = zretlai013_s02-get_zz1_etiquetas_prd
+*                    zz1_tejueloalad_prd         = zretlai013_s02-get_zz1_tejueloalad_prd
+*                    zz1_novedad2_prd            = zretlai013_s02-get_zz1_novedad2_prd
+*                    mfrnr                       = zretlai013_s02-get_mfrnr
+*                    zz1_desceditorial_prd       = zretlai013_s02-get_mfrnrt
+*                    zz1_produccinpropia_prd     =  'NO'
+*                    zz1_cumplenormasegurid_prd  =  'NO'
+*                    zz1_envoltorioproviene_prd  =  'NO'
+*                    zz1_materialproducto_prd    =  'NO'
+*                    zz1_noaptomenores3aos_prd   =  'NO'
+*                    zz1_nocontenedorcomun_prd   =  'NO'
+*                    zz1_productoartesanal_prd   =  'NO'
+*                    zz1_productosocial_prd      =  'NO'
+*                    zz1_productosostenible_prd  =  'NO'
+*                    zz1_sistemagestinrecic_prd  =  'NO'
+*                    zz1_productolocal_prd       =  'NO'
+*
+*       WHERE matnr = zretlai013_s02-matnr.
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     CLEAR git_log_all.
     git_log_all-matnr   = zretlai013_s02-matnr.
@@ -4532,10 +4528,10 @@ FORM f_consulta_ean_cegald  USING    pe_ean11
     INTO ld_cegalenred_password
    WHERE param = 'CEGALENRED_PASSWORD'.
 
-  IF sy-sysid = 'LAD'.
-    ld_dataset = 'D:\usr\sap\LAD\SYS\src\test.txt'.
+  IF sy-sysid = 'S4R'.
+    ld_dataset = 'E:\usr\sap\S4R\SYS\src\test.txt'.                                                 "preconfigurado
   ELSEIF sy-sysid = 'LAP'.
-    ld_dataset = 'D:\usr\sap\LAP\SYS\src\test.txt'.
+    ld_dataset = 'E:\usr\sap\LAP\SYS\src\test.txt'.                                                 "preconfigurado
   ENDIF.
 
 *>Confeccionar URL de consulta GET a CEGALD
@@ -4707,7 +4703,7 @@ FORM f_status_9000 .
     APPEND 'MODIF_ART' TO lit_excluding.
   ELSE.
     APPEND 'MODIFP' TO lit_excluding.
-    append 'CAMBIARTIENDA' to lit_excluding.
+    APPEND 'CAMBIARTIENDA' TO lit_excluding.
 
     IF zretlai013_s01-sap = 'X'.
       APPEND 'CREAR_ART' TO lit_excluding.
@@ -5289,33 +5285,33 @@ FORM f_9000_pbo_init_data .
   PERFORM f_get_rueckt USING zretlai013_s02-get_rueck CHANGING zretlai013_s02-get_rueckt.
 
 *>Denominación idiomas
-  if ZRETLAI013_S02-get_idioma_original is initial.
-    clear ZRETLAI013_S02-get_idioma_originalt.
-  else.
-    perform f_get_idioma_originalt using ZRETLAI013_S02-get_idioma_original
-                                CHANGING ZRETLAI013_S02-get_idioma_originalt.
-  endif.
+  IF zretlai013_s02-get_idioma_original IS INITIAL.
+    CLEAR zretlai013_s02-get_idioma_originalt.
+  ELSE.
+    PERFORM f_get_idioma_originalt USING zretlai013_s02-get_idioma_original
+                                CHANGING zretlai013_s02-get_idioma_originalt.
+  ENDIF.
 
-  if ZRETLAI013_S02-get_idioma_original_cegal is initial.
-    clear ZRETLAI013_S02-get_idioma_original_cegalt.
-  else.
-    perform f_get_idioma_originalt using ZRETLAI013_S02-get_idioma_original_cegal
-                                CHANGING ZRETLAI013_S02-get_idioma_original_cegalt.
-  endif.
+  IF zretlai013_s02-get_idioma_original_cegal IS INITIAL.
+    CLEAR zretlai013_s02-get_idioma_original_cegalt.
+  ELSE.
+    PERFORM f_get_idioma_originalt USING zretlai013_s02-get_idioma_original_cegal
+                                CHANGING zretlai013_s02-get_idioma_original_cegalt.
+  ENDIF.
 
-  if ZRETLAI013_S02-get_lengua_publicacion is initial.
-    clear ZRETLAI013_S02-get_lengua_publicaciont.
-  else.
-    perform f_get_lengua_publicaciont using ZRETLAI013_S02-get_lengua_publicacion
-                                   CHANGING ZRETLAI013_S02-get_lengua_publicaciont.
-  endif.
+  IF zretlai013_s02-get_lengua_publicacion IS INITIAL.
+    CLEAR zretlai013_s02-get_lengua_publicaciont.
+  ELSE.
+    PERFORM f_get_lengua_publicaciont USING zretlai013_s02-get_lengua_publicacion
+                                   CHANGING zretlai013_s02-get_lengua_publicaciont.
+  ENDIF.
 
-  if ZRETLAI013_S02-get_lengua_publicacion_cegal is initial.
-    clear ZRETLAI013_S02-get_lengua_publicacion_cegalt.
-  else.
-    perform f_get_lengua_publicaciont using ZRETLAI013_S02-get_lengua_publicacion_cegal
-                                   CHANGING ZRETLAI013_S02-get_lengua_publicacion_cegalt.
-  endif.
+  IF zretlai013_s02-get_lengua_publicacion_cegal IS INITIAL.
+    CLEAR zretlai013_s02-get_lengua_publicacion_cegalt.
+  ELSE.
+    PERFORM f_get_lengua_publicaciont USING zretlai013_s02-get_lengua_publicacion_cegal
+                                   CHANGING zretlai013_s02-get_lengua_publicacion_cegalt.
+  ENDIF.
 ENDFORM.
 
 *&---------------------------------------------------------------------*
@@ -5448,7 +5444,7 @@ FORM f_convertir_idioma_sinli  USING    pe_idioma
 *===================================================================================================
 * 1.- Lógica
 *===================================================================================================
-  TRANSLATE pe_idioma to UPPER CASE.
+  TRANSLATE pe_idioma TO UPPER CASE.
 
 *>Obtenemos conversión del idioma CEGAL a idioma SAP
   SELECT SINGLE valor2
@@ -5626,7 +5622,7 @@ FORM f_user_command_9000_modif_art .
         lit_lineas_texto_cegal(132) OCCURS 0 WITH HEADER LINE,
         lf_diferencias_resumen,
         ld_mfrnr                    LIKE mara-mfrnr,
-        ld_zz1_desceditorial_prd    LIKE mara-zz1_desceditorial_prd.
+        ld_zz1_desceditorial_prd    TYPE text50. "mara-zz1_desceditorial_prd.                       @preconfigurado
 
 
 * 1.- Lógica
@@ -5800,26 +5796,29 @@ FORM f_user_command_9000_modif_art .
                                   CHANGING zretlai013_s02-get_encuadernaciont.
 *   <APRADAS-28.10.2021 09:26:38-Fin
 
-    UPDATE mara SET zz1_autor_prd           = zretlai013_s02-get_nombre_autor_cegal
-                    zz1_idiomaoriginal2_prd  = zretlai013_s02-get_idioma_original_cegal
-                    zz1_traductor_prd       = zretlai013_s02-get_traductor_cegal
-                    zz1_ilustrador_prd      = zretlai013_s02-get_ilustrador_cubierta_cegal
-                    zz1_urlportada_prd      = zretlai013_s02-get_url_cegal
-                    zz1_coleccion_prd       = zretlai013_s02-get_coleccion_cegal
-                    zz1_cdu_prd             = zretlai013_s02-get_cdu_cegal
-                    zz1_ibic_prd            = zretlai013_s02-get_ibic_cegal
-                    zz1_idioma2_prd          = zretlai013_s02-get_lengua_publicacion_cegal
-                    zz1_numeroedicion_prd   = zretlai013_s02-get_numero_edicion_cegal
-                    zz1_subttulo_prd        = zretlai013_s02-get_subtitulo_cegal
-                    zz1_formato_prd         = zretlai013_s02-get_encuadernacion_cegalt              "APRADAS-28.10.2021
-                    zz1_fechaedicin_prd     = zretlai013_s02-get_fecha_publicacion_cegal
-                    zz1_npginas_prd         = zretlai013_s02-get_numero_paginas_cegal
-                    zz1_etiquetas_prd       = zretlai013_s02-get_zz1_etiquetas_prd
-                    zz1_tejueloalad_prd     = zretlai013_s02-get_zz1_tejueloalad_prd
-                    zz1_novedad2_prd        = zretlai013_s02-get_zz1_novedad2_prd
-                    mfrnr                   = ld_mfrnr
-                    zz1_desceditorial_prd   = ld_zz1_desceditorial_prd
-       WHERE matnr = zretlai013_s02-matnr.
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*    UPDATE mara SET zz1_autor_prd           = zretlai013_s02-get_nombre_autor_cegal
+*                    zz1_idiomaoriginal2_prd  = zretlai013_s02-get_idioma_original_cegal
+*                    zz1_traductor_prd       = zretlai013_s02-get_traductor_cegal
+*                    zz1_ilustrador_prd      = zretlai013_s02-get_ilustrador_cubierta_cegal
+*                    zz1_urlportada_prd      = zretlai013_s02-get_url_cegal
+*                    zz1_coleccion_prd       = zretlai013_s02-get_coleccion_cegal
+*                    zz1_cdu_prd             = zretlai013_s02-get_cdu_cegal
+*                    zz1_ibic_prd            = zretlai013_s02-get_ibic_cegal
+*                    zz1_idioma2_prd          = zretlai013_s02-get_lengua_publicacion_cegal
+*                    zz1_numeroedicion_prd   = zretlai013_s02-get_numero_edicion_cegal
+*                    zz1_subttulo_prd        = zretlai013_s02-get_subtitulo_cegal
+*                    zz1_formato_prd         = zretlai013_s02-get_encuadernacion_cegalt              "APRADAS-28.10.2021
+*                    zz1_fechaedicin_prd     = zretlai013_s02-get_fecha_publicacion_cegal
+*                    zz1_npginas_prd         = zretlai013_s02-get_numero_paginas_cegal
+*                    zz1_etiquetas_prd       = zretlai013_s02-get_zz1_etiquetas_prd
+*                    zz1_tejueloalad_prd     = zretlai013_s02-get_zz1_tejueloalad_prd
+*                    zz1_novedad2_prd        = zretlai013_s02-get_zz1_novedad2_prd
+*                    mfrnr                   = ld_mfrnr
+*                    zz1_desceditorial_prd   = ld_zz1_desceditorial_prd
+*       WHERE matnr = zretlai013_s02-matnr.
+
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     CLEAR git_log_all.
     git_log_all-matnr   = zretlai013_s02-matnr.
@@ -7190,8 +7189,9 @@ FORM f_get_parametrizacion .
     INTO TABLE git_almacenes_modelo_cdmo
    WHERE parametro = 'CENTRO_MODELO_ALMACEN'.
 
-  PERFORM f_get_tienda_usuario using ''
+  PERFORM f_get_tienda_usuario USING ''
                             CHANGING zretlai013_s02-get_werks_usuario zretlai013_s02-get_werks_usuariot.
+
 ENDFORM.
 
 *&---------------------------------------------------------------------*
@@ -7742,7 +7742,7 @@ FORM f_cargar_datos_articulo_sap .
 * 1.- Lógica
 *===================================================================================================
 * Tienda del usuario
-  PERFORM f_get_tienda_usuario using ''
+  PERFORM f_get_tienda_usuario USING ''
                             CHANGING zretlai013_s02-get_werks_usuario zretlai013_s02-get_werks_usuariot.
 
 * Datos básicos del artículo
@@ -7759,27 +7759,31 @@ FORM f_cargar_datos_articulo_sap .
                 gewei
                 volum
                 voleh
-                zz1_autor_prd
-                zz1_idiomaoriginal2_prd
-                zz1_traductor_prd
-                zz1_ilustrador_prd
-                zz1_urlportada_prd
-                zz1_coleccion_prd
-                zz1_cdu_prd
-                zz1_ibic_prd
-                zz1_idioma2_prd
-                zz1_numeroedicion_prd
-                zz1_subttulo_prd
-                zz1_formato_prd
-                zz1_fechaedicin_prd
-                zz1_npginas_prd
-                zz1_etiquetas_prd
-                zz1_tejueloalad_prd
-                zz1_novedad2_prd
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*                zz1_autor_prd
+*                zz1_idiomaoriginal2_prd
+*                zz1_traductor_prd
+*                zz1_ilustrador_prd
+*                zz1_urlportada_prd
+*                zz1_coleccion_prd
+*                zz1_cdu_prd
+*                zz1_ibic_prd
+*                zz1_idioma2_prd
+*                zz1_numeroedicion_prd
+*                zz1_subttulo_prd
+*                zz1_formato_prd
+*                zz1_fechaedicin_prd
+*                zz1_npginas_prd
+*                zz1_etiquetas_prd
+*                zz1_tejueloalad_prd
+*                zz1_novedad2_prd
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                 mtart
                 matkl
                 mfrnr
-                zz1_desceditorial_prd
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*                zz1_desceditorial_prd
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                 mstav
                 mstde
                 taklv
@@ -7799,27 +7803,31 @@ FORM f_cargar_datos_articulo_sap .
           zretlai013_s02-get_meabm,
           zretlai013_s02-get_volum,
           zretlai013_s02-get_voleh,
-          zretlai013_s02-get_nombre_autor,
-          zretlai013_s02-get_idioma_original,
-          zretlai013_s02-get_traductor,
-          zretlai013_s02-get_ilustrador_cubierta,
-          zretlai013_s02-get_url,
-          zretlai013_s02-get_coleccion,
-          zretlai013_s02-get_cdu,
-          zretlai013_s02-get_ibic,
-          zretlai013_s02-get_lengua_publicacion,
-          zretlai013_s02-get_numero_edicion,
-          zretlai013_s02-get_subtitulo,
-          zretlai013_s02-get_encuadernaciont,                                                       "APRADAS-28.10.2021
-          zretlai013_s02-get_fecha_publicacion,
-          zretlai013_s02-get_numero_paginas,
-          zretlai013_s02-get_zz1_etiquetas_prd,
-          zretlai013_s02-get_zz1_tejueloalad_prd,
-          zretlai013_s02-get_zz1_novedad2_prd,
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*          zretlai013_s02-get_nombre_autor,
+*          zretlai013_s02-get_idioma_original,
+*          zretlai013_s02-get_traductor,
+*          zretlai013_s02-get_ilustrador_cubierta,
+*          zretlai013_s02-get_url,
+*          zretlai013_s02-get_coleccion,
+*          zretlai013_s02-get_cdu,
+*          zretlai013_s02-get_ibic,
+*          zretlai013_s02-get_lengua_publicacion,
+*          zretlai013_s02-get_numero_edicion,
+*          zretlai013_s02-get_subtitulo,
+*          zretlai013_s02-get_encuadernaciont,                                                       "APRADAS-28.10.2021
+*          zretlai013_s02-get_fecha_publicacion,
+*          zretlai013_s02-get_numero_paginas,
+*          zretlai013_s02-get_zz1_etiquetas_prd,
+*          zretlai013_s02-get_zz1_tejueloalad_prd,
+*          zretlai013_s02-get_zz1_novedad2_prd,
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
           zretlai013_s02-get_mtart,
           zretlai013_s02-get_matkl,
           zretlai013_s02-get_mfrnr,
-          zretlai013_s02-get_mfrnrt,
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*          zretlai013_s02-get_mfrnrt,
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
           zretlai013_s02-get_situacion,
           zretlai013_s02-get_situacion_datab,
           zretlai013_s02-get_taklv,
@@ -8171,87 +8179,87 @@ ENDFORM.
 *===================================================================================================
 *& Form f_get_tienda_usuario
 *===================================================================================================
-FORM f_get_tienda_usuario  using    pe_modificar
+FORM f_get_tienda_usuario  USING    pe_modificar
                            CHANGING ps_werks
                                     ps_werkst.
 
 * 0.- Declaración de variables
 *===================================================================================================
-  data: wa_ZRETLAI013_T04 like ZRETLAI013_T04.
+  DATA: wa_zretlai013_t04 LIKE zretlai013_t04.
 
 * 1.- Lógica
 *===================================================================================================
 *>Inicializamos campos del popup
-  clear: gd_werks,
+  CLEAR: gd_werks,
          gd_werkst.
 
 *>Obtenemos tienda asignada actual para el usuario
-  select single werks
-    from ZRETLAI013_T04
-    into gd_werks
-   where uname = sy-uname.
+  SELECT SINGLE werks
+    FROM zretlai013_t04
+    INTO gd_werks
+   WHERE uname = sy-uname.
 
-  if gd_werks is not initial.
-    perform f_get_werkst using gd_werks
+  IF gd_werks IS NOT INITIAL.
+    PERFORM f_get_werkst USING gd_werks
                       CHANGING gd_werkst.
-  endif.
+  ENDIF.
 
-  if pe_modificar = '' and gd_werks is not initial.
+  IF pe_modificar = '' AND gd_werks IS NOT INITIAL.
 *   Si no estamos modificando la tienda y el usuario tiene tienda asignada, tomamos esa tienda y nos
 *   salimos
     ps_werks = gd_werks.
     ps_werkst = gd_werkst.
 
-    exit.
-  endif.
+    EXIT.
+  ENDIF.
 
 *>Mostramos popup de tienda asignada al usuario
-  call SCREEN 0800 STARTING AT 10 10.
+  CALL SCREEN 0800 STARTING AT 10 10.
 
-  if gd_werks is not initial.
+  IF gd_werks IS NOT INITIAL.
 *   Si hay tienda informada...
 
 *   Obtenemos denominación
-    perform f_get_werkst using gd_werks CHANGING gd_werkst.
+    PERFORM f_get_werkst USING gd_werks CHANGING gd_werkst.
 
 *   Miramos si esa tienda es la que tenia asignada el usuario
-    select single *
-      from ZRETLAI013_T04
-      into wa_ZRETLAI013_T04
-     where uname = sy-uname
-       and werks = gd_werks.
+    SELECT SINGLE *
+      FROM zretlai013_t04
+      INTO wa_zretlai013_t04
+     WHERE uname = sy-uname
+       AND werks = gd_werks.
 
-    if sy-subrc <> 0.
+    IF sy-subrc <> 0.
 *     Si no es la que tenia, la asignamos al usuario
-      wa_ZRETLAI013_T04-uname = sy-uname.
-      wa_ZRETLAI013_T04-werks = gd_werks.
+      wa_zretlai013_t04-uname = sy-uname.
+      wa_zretlai013_t04-werks = gd_werks.
 
-      MODIFY ZRETLAI013_T04 from wa_ZRETLAI013_T04.
-    endif.
+      MODIFY zretlai013_t04 FROM wa_zretlai013_t04.
+    ENDIF.
 
 *   Tomamos la tienda informada en el popup
     ps_werks = gd_werks.
     ps_werkst = gd_werkst.
-  else.
+  ELSE.
 *   Si no hay tienda informada...
 
 *   Miramos si el usuario tenia tienda asignada
-    select single *
-      from ZRETLAI013_T04
-      into wa_ZRETLAI013_T04
-     where uname = sy-uname.
+    SELECT SINGLE *
+      FROM zretlai013_t04
+      INTO wa_zretlai013_t04
+     WHERE uname = sy-uname.
 
-    if sy-subrc = 0.
+    IF sy-subrc = 0.
 *     Si la tenia, tomamos esa tienda
-      ps_werks = wa_ZRETLAI013_T04-werks.
-      perform f_get_werkst using ps_werks CHANGING ps_werkst.
-    else.
+      ps_werks = wa_zretlai013_t04-werks.
+      PERFORM f_get_werkst USING ps_werks CHANGING ps_werkst.
+    ELSE.
 *     Si no tenia tienda asignada, error
 
 *     MsgA: Su usuario no está asignado a ninguna tienda. No es posible continuar.
-      message a016(ZRETLAI013).
-    endif.
-  endif.
+      MESSAGE a016(zretlai013).
+    ENDIF.
+  ENDIF.
 ENDFORM.
 
 *&---------------------------------------------------------------------*
@@ -9265,8 +9273,8 @@ FORM f_0500_povr_mfrnr .
 
   SELECT a~lifnr AS mfrnr
          b~name_org1 AS mfrnrt
-    FROM lfa1 as a
-    inner join but000 as b on ( b~partner = a~lifnr )
+    FROM lfa1 AS a
+    INNER JOIN but000 AS b ON ( b~partner = a~lifnr )
     INTO CORRESPONDING FIELDS OF TABLE lit_mfrnr
    WHERE ktokk = 'Z008'.
 
@@ -9445,48 +9453,48 @@ FORM f_pbo_0700_config .
 ENDFORM.
 
 FORM f_user_command_0800 .
-  data: ld_okcode like sy-ucomm.
+  DATA: ld_okcode LIKE sy-ucomm.
 
-  ld_okcode = GD_OKCODE_0800.
+  ld_okcode = gd_okcode_0800.
 
-  clear: sy-ucomm,
+  CLEAR: sy-ucomm,
          gd_okcode_0800.
 
-  case ld_okcode.
-    when 'ACEP_0800'.
-      if gd_werks is initial.
+  CASE ld_okcode.
+    WHEN 'ACEP_0800'.
+      IF gd_werks IS INITIAL.
 *       MsgE: Informar una tienda.
-        message i017(zretlai013) DISPLAY LIKE 'E'.
-      else.
-        leave to SCREEN 0.
-      endif.
-    when 'CANC_0800'.
-      leave to screen 0.
-  endcase.
+        MESSAGE i017(zretlai013) DISPLAY LIKE 'E'.
+      ELSE.
+        LEAVE TO SCREEN 0.
+      ENDIF.
+    WHEN 'CANC_0800'.
+      LEAVE TO SCREEN 0.
+  ENDCASE.
 ENDFORM.
 
 FORM f_0800_pai_validar_werks .
-  select single werks
-    into gd_werks
-    from t001w
-   where werks = gd_werks
-     and vlfkz = 'A'.
+  SELECT SINGLE werks
+    INTO gd_werks
+    FROM t001w
+   WHERE werks = gd_werks
+     AND vlfkz = 'A'.
 
-  if sy-subrc <> 0.
+  IF sy-subrc <> 0.
 *   MsgE: Tienda & no existe o no es una tienda.
-    message e018(zretlai013) WITH gd_werks DISPLAY LIKE 'E'.
-  endif.
+    MESSAGE e018(zretlai013) WITH gd_werks DISPLAY LIKE 'E'.
+  ENDIF.
 ENDFORM.
 
 FORM f_0800_pbo_init_data .
-  if gd_werks is initial.
-    clear gd_werkst.
-  else.
-    select single name1
-      from t001w
-      into gd_werkst
-     where werks = gd_werks.
-  endif.
+  IF gd_werks IS INITIAL.
+    CLEAR gd_werkst.
+  ELSE.
+    SELECT SINGLE name1
+      FROM t001w
+      INTO gd_werkst
+     WHERE werks = gd_werks.
+  ENDIF.
 ENDFORM.
 
 FORM f_0800_povr_werks .
@@ -9499,11 +9507,11 @@ FORM f_0800_povr_werks .
 
 * 1.- Logica
 *======================================================================
-  select werks
+  SELECT werks
          name1
-    from t001w
-    into table lit_Werks
-   where vlfkz = 'A'.
+    FROM t001w
+    INTO TABLE lit_werks
+   WHERE vlfkz = 'A'.
 
   CALL FUNCTION 'F4IF_INT_TABLE_VALUE_REQUEST'
     EXPORTING
@@ -9532,11 +9540,14 @@ ENDFORM.
 FORM f_get_idioma_originalt  USING    pe_idioma_original
                              CHANGING ps_idioma_originalt.
 
-  select single description
-    from ZZ1_9F245DF7AF2A
-    into ps_idioma_originalt
-   where code = pe_idioma_original
-     and language = sy-langu.
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*  select single description
+*    from ZZ1_9F245DF7AF2A
+*    into ps_idioma_originalt
+*   where code = pe_idioma_original
+*     and language = sy-langu.
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 ENDFORM.
 *&---------------------------------------------------------------------*
 *& Form f_get_lengua_publicaciont
@@ -9549,11 +9560,13 @@ ENDFORM.
 FORM f_get_lengua_publicaciont  USING    pe_lengua_publicacion
                                 CHANGING ps_lengua_publicaciont.
 
-  select single description
-    from ZZ1_55E15C2ADC74
-    into ps_lengua_publicaciont
-   where code = pe_lengua_publicacion
-     and language = sy-langu.
+*   PRECONFIGURADO->INICIO->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*  select single description
+*    from ZZ1_55E15C2ADC74
+*    into ps_lengua_publicaciont
+*   where code = pe_lengua_publicacion
+*     and language = sy-langu.
+*   PRECONFIGURADO<-FIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 ENDFORM.
 
 *&---------------------------------------------------------------------*
@@ -9569,42 +9582,42 @@ FORM f_determinar_si_es_novedad  USING    pe_fecha_primera_edicion
 *===================================================================================================
 * 0.- Declaración de variables
 *===================================================================================================
-  data: ld_numdias type int4,
-        ld_numdias_t like zhardcodes-valor,
-        ld_dias_transcurridos type int4.
+  DATA: ld_numdias            TYPE int4,
+        ld_numdias_t          LIKE zhardcodes-valor,
+        ld_dias_transcurridos TYPE int4.
 
 *===================================================================================================
 * 1.- Lógica
 *===================================================================================================
 
 *>Obtener parametrización de dias para considerar que un artículo deja de ser novedad
-  select single valor
-    from zhardcodes
-    into ld_numdias_t
-   where programa = 'ZRETLAI007'
-     and param    = 'DIAS_NOVEDAD'.
+  SELECT SINGLE valor
+    FROM zhardcodes
+    INTO ld_numdias_t
+   WHERE programa = 'ZRETLAI007'
+     AND param    = 'DIAS_NOVEDAD'.
 
-  if sy-subrc = 0.
+  IF sy-subrc = 0.
     ld_numdias = ld_numdias_t.
-  endif.
+  ENDIF.
 
-  if pe_fecha_primera_edicion is initial.
+  IF pe_fecha_primera_edicion IS INITIAL.
 *   Si no tenemos fecha primera edicion, no es novedad
     ps_novedad = 'NO'.
-  else.
+  ELSE.
 *   Si tenemos fecha primera edición
 
 *  >Calcular los dias transcurridos desde la fecha de primera edición hasta el día de hoy
     ld_dias_transcurridos = sy-datum - pe_fecha_primera_edicion.
 
-    if ld_dias_transcurridos >= ld_numdias.
+    IF ld_dias_transcurridos >= ld_numdias.
 *     Si han transcurrido los dias parametrizados, no es novedad
       ps_novedad = 'NO'.
-    else.
+    ELSE.
 *     Sino, es novedad
       ps_novedad = 'SI'.
-    endif.
-  endif.
+    ENDIF.
+  ENDIF.
 ENDFORM.
 
 *&---------------------------------------------------------------------*
@@ -9617,24 +9630,24 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM f_9000_pai_validar_novedad .
 
-  if zretlai013_s01-sap = 'X'.
-    if ZRETLAI013_S02-GET_FECHA_PUBLICACION_CEGAL is not initial.
+  IF zretlai013_s01-sap = 'X'.
+    IF zretlai013_s02-get_fecha_publicacion_cegal IS NOT INITIAL.
 *     Determinar si el nuevo artículo debe considerarse novedad o no
-      perform f_determinar_si_es_novedad using zretlai013_s02-get_fecha_publicacion_cegal
+      PERFORM f_determinar_si_es_novedad USING zretlai013_s02-get_fecha_publicacion_cegal
                                       CHANGING zretlai013_s02-get_zz1_novedad2_prd.
-    else.
+    ELSE.
       zretlai013_s02-get_zz1_novedad2_prd = 'NO'.
-    endif.
+    ENDIF.
 
-  else.
-    if ZRETLAI013_S02-GET_FECHA_PUBLICACION is not initial.
+  ELSE.
+    IF zretlai013_s02-get_fecha_publicacion IS NOT INITIAL.
 *     Determinar si el nuevo artículo debe considerarse novedad o no
-      perform f_determinar_si_es_novedad using zretlai013_s02-get_fecha_publicacion
+      PERFORM f_determinar_si_es_novedad USING zretlai013_s02-get_fecha_publicacion
                                       CHANGING zretlai013_s02-get_zz1_novedad2_prd.
-    else.
+    ELSE.
       zretlai013_s02-get_zz1_novedad2_prd = 'NO'.
-    endif.
-  endif.
+    ENDIF.
+  ENDIF.
 
 
 ENDFORM.

@@ -1,4 +1,3 @@
-* regenerated at 26.10.2020 08:01:56
 FUNCTION-POOL ZRETLAI013_PARAM           MESSAGE-ID SV.
 
 * INCLUDE LZRETLAI013_PARAMD...              " Local class definition

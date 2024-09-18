@@ -1,7 +1,5 @@
 *---------------------------------------------------------------------*
 *    program for:   TABLEFRAME_ZRETLAI013_PARAM
-*   generation date: 26.10.2020 at 08:01:55
-*   view maintenance generator version: #001407#
 *---------------------------------------------------------------------*
 FUNCTION TABLEFRAME_ZRETLAI013_PARAM   .
 

@@ -1,8 +1,5 @@
 *---------------------------------------------------------------------*
-*    program for:   TABLEPROC_ZRETLAI013_PARAM
+*    view related PAI modules
 *---------------------------------------------------------------------*
-FUNCTION TABLEPROC_ZRETLAI013_PARAM    .
 
-  PERFORM TABLEPROC.
-
-ENDFUNCTION.
+INCLUDE LSVIMITX . "base table related PAI modules

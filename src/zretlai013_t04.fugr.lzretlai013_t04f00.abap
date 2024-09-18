@@ -1,8 +1,6 @@
 *---------------------------------------------------------------------*
-*    program for:   TABLEPROC_ZRETLAI013_PARAM
+*    view related FORM routines
 *---------------------------------------------------------------------*
-FUNCTION TABLEPROC_ZRETLAI013_PARAM    .
 
-  PERFORM TABLEPROC.
-
-ENDFUNCTION.
+* base table related FORM-routines.............
+INCLUDE LSVIMFTX .
